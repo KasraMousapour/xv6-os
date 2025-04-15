@@ -145,3 +145,50 @@ memcpy(void *dst, const void *src, uint n)
 {
   return memmove(dst, src, n);
 }
+
+char 
+*strstr(char *X,  char *Y) 
+{
+  int n = strlen(Y);
+  while (*X) {
+  if (!memcmp(X, Y, n)) {
+  return X;
+  }
+  X++;
+  }
+  return 0;
+}
+char* 
+strcat(char* dest, char* src) {
+  char* ptr = dest + strlen(dest); // Move pointer to the end of dest
+
+  while (*src != '\0') { // Copy src to dest
+      *ptr++ = *src++;
+  }
+  *ptr = '\0'; // Null-terminate the result
+
+  return dest;
+}
+// char* join_strings(char** strings, int count) {
+//   // Calculate total size needed
+//   int total_size = 0;
+//   for (int i = 0; i < count; i++) {
+//       total_size += strlen(strings[i]);
+//   }
+
+//   // Allocate memory for the combined string (+1 for the null terminator)
+//   char* result = (char*)malloc(total_size + 1);
+//   if (result == 0) {
+//       printf("Memory allocation failed\n");
+//       return 0;
+//   }
+
+//   result[0] = '\0'; // Initialize result as an empty string
+
+//   // Concatenate strings
+//   for (int i = 0; i < count; i++) {
+//       strcat(result, strings[i]);
+//   }
+
+//   return result;
+// }

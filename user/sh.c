@@ -1,5 +1,6 @@
 // Shell.
 
+// #include <stdio.h>
 #include "kernel/types.h"
 #include "user/user.h"
 #include "kernel/fcntl.h"
@@ -54,6 +55,7 @@ void panic(char*);
 struct cmd *parsecmd(char*);
 void runcmd(struct cmd*) __attribute__((noreturn));
 
+
 // Execute cmd.  Never returns.
 void
 runcmd(struct cmd *cmd)
@@ -73,12 +75,13 @@ runcmd(struct cmd *cmd)
     panic("runcmd");
 
   case EXEC:
-    ecmd = (struct execcmd*)cmd;
-    if(ecmd->argv[0] == 0)
-      exit(1);
-    exec(ecmd->argv[0], ecmd->argv);
-    fprintf(2, "exec %s failed\n", ecmd->argv[0]);
-    break;
+  ecmd = (struct execcmd*)cmd;
+  if(ecmd->argv[0] == 0)
+    exit(1);
+  exec(ecmd->argv[0], ecmd->argv);
+  fprintf(2, "exec %s failed\n", ecmd->argv[0]);
+  break;
+
 
   case REDIR:
     rcmd = (struct redircmd*)cmd;
@@ -134,7 +137,7 @@ runcmd(struct cmd *cmd)
 int
 getcmd(char *buf, int nbuf)
 {
-  write(2, "$ ", 2);
+  write(2, "$kasra ", 7);
   memset(buf, 0, nbuf);
   gets(buf, nbuf);
   if(buf[0] == 0) // EOF
