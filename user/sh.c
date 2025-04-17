@@ -78,6 +78,31 @@ runcmd(struct cmd *cmd)
   ecmd = (struct execcmd*)cmd;
   if(ecmd->argv[0] == 0)
     exit(1);
+  if (ecmd->argv[0] && strcmp(ecmd->argv[0], "!") == 0) { 
+        // Calculate total character count
+        int total_length = 0;
+        for (int i = 0; ecmd->argv[i] != 0; i++) {
+            total_length += strlen(ecmd->argv[i]);
+        }
+    
+        // Check if the total length exceeds MAX_LENGTH
+        if (total_length > 512) {
+            fprintf(2, "Error: Total characters exceed %d.\n", 512);
+    
+        }
+    
+        // Print each argument
+        for (int i = 0; ecmd->argv[i] != 0; i++) {
+            if (strstr(ecmd->argv[i], "os") != 0) { // Check if the substring 'os' exists
+                printf("\033[34m%s \033[0m",  ecmd->argv[i]); // Print 'os' in blue
+            } else {
+                printf("%s ", ecmd->argv[i]);
+            }
+        }
+    
+
+    exit(0); // required  
+  } 
   exec(ecmd->argv[0], ecmd->argv);
   fprintf(2, "exec %s failed\n", ecmd->argv[0]);
   break;
