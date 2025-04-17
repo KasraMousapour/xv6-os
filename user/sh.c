@@ -81,7 +81,7 @@ runcmd(struct cmd *cmd)
   if (ecmd->argv[0] && strcmp(ecmd->argv[0], "!") == 0) { 
         // Calculate total character count
         int total_length = 0;
-        for (int i = 0; ecmd->argv[i] != 0; i++) {
+        for (int i = 1; ecmd->argv[i] != 0; i++) {
             total_length += strlen(ecmd->argv[i]);
         }
     
@@ -92,13 +92,14 @@ runcmd(struct cmd *cmd)
         }
     
         // Print each argument
-        for (int i = 0; ecmd->argv[i] != 0; i++) {
+        for (int i = 1; ecmd->argv[i] != 0; i++) {
             if (strstr(ecmd->argv[i], "os") != 0) { // Check if the substring 'os' exists
                 printf("\033[34m%s \033[0m",  ecmd->argv[i]); // Print 'os' in blue
             } else {
                 printf("%s ", ecmd->argv[i]);
             }
         }
+        printf("\n");
     
 
     exit(0); // required  
