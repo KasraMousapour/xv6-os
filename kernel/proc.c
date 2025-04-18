@@ -693,3 +693,8 @@ procdump(void)
     printf("\n");
   }
 }
+
+void
+trigger(void){
+  
+}
