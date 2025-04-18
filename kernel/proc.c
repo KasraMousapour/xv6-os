@@ -5,6 +5,7 @@
 #include "spinlock.h"
 #include "proc.h"
 #include "defs.h"
+#include "costum_logger.h"
 
 struct cpu cpus[NCPU];
 
@@ -694,7 +695,9 @@ procdump(void)
   }
 }
 
-void
+int
 trigger(void){
-  
+    logger("This is a log to test a new xv6 system call", INFO);
+    return 1;
+    
 }
